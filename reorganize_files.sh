@@ -1,17 +1,12 @@
 current_dir=$(PWD)
 sub_dirs=$(find . -type d -name "*RADIEMS*")
 
-i=0
+
 until [ $i -gt 34 ]
 do
-    echo i: $i
+    echo i: $1
     ((i=i+1))
-    if [i -lt "10"]
-    then
-        $(mkdir -p "000${i}/S0002")
-    else
-        $(mkdir -p "00${i}/S0002")
-    fi
+    mkdir -p "$(printf "%04d" $i)/S0002"
 done
 
 
@@ -38,7 +33,7 @@ do
     $(mkdir "$folder/T2")
     $(mkdir "$folder/T2_FLAIR")
     DTI_LR_files=$(find $folder -type f -name "*DTI_LR*")
-    echo $DTI_LR_files | xargs mv -t "$folder/DTI_LR"
+    # echo $DTI_LR_files | xargs mv -t "$folder/DTI_LR"
 
     for file in $DTI_LR_files
     do
@@ -57,12 +52,9 @@ do
     T2_FLAIR_file=$(find $folder -type f -name "*FLAIR*")
     BOLD_file=$(find $folder -type f -name "*BOLD*")
 
-    while IFS= read -r -d '' file; do
-      echo $T2_FLAIR_file
-      $(mv "$T2_FLAIR_file" $folder/T2_FLAIR)    
-      done
-
-
+    # TODO: refactor this
+    # NOTE: resting bold images to come. Uncomment commented-out lines below and assign $Resting_BOLD
+    # var to file.
     for file in $T1_file
     do
         $(mv $file $folder/T1)
@@ -83,10 +75,10 @@ do
         $(mv "$file" $folder/Resting_BOLD)
     done
 
-    for file in $Resting_BOLD
-    do
-        $(mv $file $folder/Resting_BOLD)
-    done
+    # for file in $Resting_BOLD
+    # do
+    #     $(mv $file $folder/Resting_BOLD)
+    # done
 done
 
 
