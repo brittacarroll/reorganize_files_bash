@@ -13,7 +13,7 @@ numFiles = 20
 #         fileToCreate = os.path.join(dirToCreate, fileName)
 
 #         open(fileToCreate, 'w')
-
+print('test')
 directory = os.getcwd()
 pdb.set_trace()
 filesToGrab = []
