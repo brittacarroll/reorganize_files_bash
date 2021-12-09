@@ -13,9 +13,7 @@ numFiles = 20
 #         fileToCreate = os.path.join(dirToCreate, fileName)
 
 #         open(fileToCreate, 'w')
-print('test')
 directory = os.getcwd()
-pdb.set_trace()
 filesToGrab = []
 for root, subdirectories, files in os.walk(directory):
     # for subdir in subdirectories:
